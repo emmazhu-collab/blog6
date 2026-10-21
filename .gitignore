@@ -1,0 +1,12 @@
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+# PSID data and extracts remain local. Keep acquisition instructions visible.
+/data/raw/*
+!/data/raw/README.md
