@@ -22,7 +22,7 @@ Download Parent Identification 2023 and Cross-year Individual 1968–2023. This 
 
 The child uses `PID2` + `PID3`; the birth father uses `PID23` + `PID24`. They match `ER30001` + `ER30002` in the Individual File. The script combines each pair as family ID times 1,000 plus person number. Unknown father person number 999 is excluded.
 
-The needed individual fields are interview number, sequence number, family role, and age:
+The needed individual fields are interview number, sequence number, family role, and age. Match the family interview ID together with the interview year to find the correct family income record; the family interview ID alone is not a permanent person ID:
 
 | Interview year | Family ID | Sequence | Role | Age |
 | --- | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ The needed individual fields are interview number, sequence number, family role,
 
 ## Family income extract
 
-Create a family-level extract containing the variables below for all available families, without a custom sample restriction. Income is reported for the year before the interview. Export Excel and keep the original variable names as column headers. The original custom job was `J366467`; your job will have a different number. Rename your Excel file to `J366467.xlsx` for this script. Different releases or extraction settings may change the reference results.
+Create a family-level extract containing the variables below for all available families, without a custom sample restriction. Select survey waves 2011, 2013, 2015, 2017, 2019, 2021, and 2023. Income is reported for the year before the interview: 2010, 2012, 2014, 2016, 2018, 2020, and 2022, respectively. Export Excel and keep the original variable names as column headers. The original custom job was `J366467`; your job will have a different number. Rename your Excel file to `J366467.xlsx` for this script. Different releases or extraction settings may change the reference results.
 
 | Interview | Release | Family interview ID | Head / Reference Person income | Spouse/Partner income |
 | --- | --- | --- | --- | --- |

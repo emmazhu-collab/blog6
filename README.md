@@ -4,6 +4,8 @@ This project compares the earnings link between birth fathers and adult children
 
 This repository contains the analysis process. The article stays in the separate `website-recovered` project. No article or Render step is needed to reproduce these results.
 
+The article is a six-step tutorial: obtain the inputs, prepare the data with Python, match IDs with SQL, calculate average income, compare IGE estimates, and check life-cycle bias. Detailed setup and reproduction instructions stay in this README. The short article examples assume the preparation steps have run; use the complete script for reproduction.
+
 ## Folder structure
 
 ```text
@@ -37,7 +39,7 @@ results/
 
 ## Data sources
 
-The inputs are the PSID 2023 Parent Identification File, 1968–2023 Individual File, and a custom family earnings extract. See [data/raw/README.md](data/raw/README.md) for the official sources, required variables, and filenames. The original files are unchanged.
+The inputs are the PSID 2023 Parent Identification File, 1968–2023 Cross-Year Individual File, and a custom family earnings extract for the 2011, 2013, 2015, 2017, 2019, 2021, and 2023 survey waves. These interviews report earnings from 2010, 2012, 2014, 2016, 2018, 2020, and 2022. The downloaded 2017 wave (2016 earnings) is not used in this analysis. See [data/raw/README.md](data/raw/README.md) for the official sources, required variables, and filenames. The original files are unchanged.
 
 CPI is the BLS Consumer Price Index for All Urban Consumers, all items, not seasonally adjusted, from [FRED](https://fred.stlouisfed.org/series/CPIAUCNS). The saved monthly file covers January 2010–December 2022. The script checks for 12 months per year, calculates annual means, and expresses earnings in 2022 dollars. It needs no internet connection once the local inputs are present.
 
@@ -124,7 +126,7 @@ The website analysis ran successfully before this repository was organized. Duri
 
 The fixed-width reader uses column positions in the supplied `.do` files and retains only needed columns, rather than loading all 2,771 Individual File variables. The Excel reader reads the original cells directly because this PSID workbook contains a nonstandard worksheet attribute rejected by some Excel libraries.
 
-The permanent person key combines the 1968 family ID and person number. Biological father links come from the Parent Identification File. SQL joins each person's interview-year and family ID to the income extract. Only the current Reference Person (role 10, sequence 1) receives Reference Person income. Current members with role 20 or 22 receive Spouse/Partner income when available. Other family members never receive these earnings. The code checks duplicate keys and records join counts, missing income, and zero income. Unknown father identifiers and invalid income codes are excluded.
+The permanent person key combines the 1968 family ID and person number. Biological father links come from the Parent Identification File. SQL joins each person's interview year and family interview ID to the income extract. Both fields are needed because a family number may appear in more than one wave. This family interview ID is different from the permanent person key. The short individual-to-family JOIN in the article demonstrates these matching keys; assigning earnings also requires the household role checks below. Only the current Reference Person (role 10, sequence 1) receives Reference Person income. Current members with role 20 or 22 receive Spouse/Partner income when available. Other family members never receive these earnings. The code checks duplicate keys and records join counts, missing income, and zero income. Unknown father identifiers and invalid income codes are excluded.
 
 `SELECT`, `JOIN`, and `WHERE` construct individual earnings records. `GROUP BY`, `AVG`, and `COUNT(DISTINCT year)` build complete three-year summaries. SQL then joins both summaries to each biological link. SQLite runs in memory and is rebuilt each time; no database of individual records is saved or shared.
 
@@ -134,7 +136,7 @@ The regression is log child income on log father income with an intercept. Multi
 
 ## Interpretation and limits
 
-These unweighted results describe selected positive earners with complete records, not all U.S. families. Income excludes farm and unincorporated business income, and PSID imputes missing components. The first two income waves have only Head income, which limits coverage and motivates the father-only comparison. The 2016 fields are available but not used.
+These unweighted results describe selected positive earners with complete records, not all U.S. families. Income excludes farm and unincorporated business income, and PSID imputes missing components. The first two income waves have only Head income, which limits coverage and motivates the father-only comparison. The 2017 survey fields, which report 2016 earnings, are available but not used.
 
 Averaging can reduce temporary earnings fluctuations but does not remove life-cycle bias. In the career-stage comparison, age and calendar time change together. The pattern is consistent with possible life-cycle bias, not statistical confirmation; the interval for the change includes zero. Neither comparison identifies a causal effect.
 
