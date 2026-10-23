@@ -1,6 +1,7 @@
-"""Run from any directory: python path/to/code/analysis.py.
-Raw PSID files stay in data/raw; override with PSID_DATA_DIR.
-Only aggregate outputs are written here. No raw microdata are redistributed.
+"""Reproduce the published 2014/2022 life-cycle comparison.
+Run locally from any directory: python path/to/code/analysis.py.
+This preserves the original sample construction and bootstrap sequence.
+Only aggregate outputs are written; no raw microdata are redistributed.
 """
 from pathlib import Path
 import os, re, sqlite3, json, zipfile, xml.etree.ElementTree as ET
@@ -12,7 +13,8 @@ import matplotlib.pyplot as plt
 
 POST = Path(__file__).resolve().parents[1]
 RAW = Path(os.environ.get('PSID_DATA_DIR', str(POST / 'data/raw')))
-OUT = POST / 'results'
+# Keep this supplementary reproduction separate from the final same-age results.
+OUT = POST / 'results' / 'life_cycle_2014_2022'
 FIG = OUT / 'figures'
 FIG.mkdir(parents=True, exist_ok=True)
 

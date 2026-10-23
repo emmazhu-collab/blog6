@@ -10,3 +10,6 @@ __pycache__/
 # PSID data and extracts remain local. Keep acquisition instructions visible.
 /data/raw/*
 !/data/raw/README.md
+
+# Local same-age analysis outputs; inspect aggregates before sharing
+/results_same_age/

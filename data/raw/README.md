@@ -9,6 +9,9 @@ pid23/PID23.txt
 pid23/PID23.do
 ind2023er/IND2023ER.txt
 ind2023er/IND2023ER.do
+J366581.xlsx
+J366581_codebook.pdf
+J366581_labels.txt
 J366467.xlsx
 J366467_codebook.pdf
 J366467_labels.txt
@@ -50,3 +53,24 @@ Create a family-level extract containing the variables below for all available f
 These are the 26 columns in the original workbook, in the displayed order. The current reader expects this original layout. The 2017 columns are retained in the original input but not used in the analysis. The income variables measure labor income excluding farm and unincorporated business income. Read the supplied codebook before changing the income definition.
 
 No individual-level processed extract is included in the public repository. The analysis creates person-level tables temporarily in memory and saves only aggregate statistics and figures.
+
+## Historical income extract for the same-age analysis
+
+The revised script also needs the new Data Center job saved as `J366581.xlsx`, with its matching `J366581_codebook.pdf` and `J366581_labels.txt`. It includes a 1994 interview record and later waves through 2013. The 1994 interview fields are `ER2002` (family interview ID), `ER4140` (Head labor income for 1993), and `ER4144` (Wife labor income for 1993). In the Individual File, that wave uses `ER33101` (family interview ID), `ER33102` (sequence), `ER33103` (role), and `ER33104` (age). Later comparable income years are 1994, 1995, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, and 2012. The extract overlaps some fields in `J366467.xlsx`; the script checks shared values by family and wave and counts each observation once.
+
+The same-age analysis uses the comparable variable series from both extracts through income year 2022, beginning in 1993. The 1994-wave codebook says ER4140 and ER4144 exclude farm income and the labor portion of unincorporated business income, matching the later measure used in the analysis. It excludes extra retrospective questions with different definitions. Keep the original workbooks and codebooks intact; the script selects columns by their variable names.
+
+The revised local layout is:
+
+```text
+pid23/PID23.txt
+pid23/PID23.do
+ind2023er/IND2023ER.txt
+ind2023er/IND2023ER.do
+J366581.xlsx
+J366581_codebook.pdf
+J366581_labels.txt
+J366467.xlsx
+J366467_codebook.pdf
+J366467_labels.txt
+```

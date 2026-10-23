@@ -1,0 +1,11 @@
+{
+  "pairs": 321,
+  "unique_fathers": 249,
+  "bootstrap_replications": 2000,
+  "seed": 6400,
+  "bootstrap_unit": "father; paired draws across all specifications",
+  "age_controls": "linear father and child measurement ages centered at 40; sensitivity only",
+  "selection": "same sample for single and three-year average",
+  "interpretation": "unweighted association; age matching and controls do not eliminate life-cycle or cohort bias",
+  "main_intervals_available": true
+}

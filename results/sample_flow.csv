@@ -1,0 +1,9 @@
+stage,pairs,unique_fathers
+valid_identified_links,53437,
+both_in_individual_file,29218,13261.0
+both_at_least_one_positive_year_any_valid_age,6418,3276.0
+both_at_least_three_positive_years_any_valid_age,4526,2408.0
+both_at_least_three_years_ages_35_45,621,434.0
+single_age_gap_at_most_2,498,370.0
+mean_age_gap_at_most_2_separate_check,331,256.0
+both_age_gaps_at_most_2_final,321,249.0
